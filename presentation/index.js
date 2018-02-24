@@ -33,6 +33,29 @@ const theme = createTheme({
 });
 
 export default class Presentation extends React.Component {
+  constructor() {
+    super();
+    this.state = { rows: [] };
+  }
+
+  componentDidMount() {
+    const db = openDatabase("mydb", "1.0", "Test DB", 2 * 1024 * 1024);
+
+    db.transaction((tx) => {
+      tx.executeSql("CREATE TABLE IF NOT EXISTS MOVIES (id unique, first_name, last_name, email)");
+    });
+
+    db.transaction((tx) => {
+      tx.executeSql("SELECT * FROM MOVIES", [], (_, results) => {
+        const rows = [];
+        for (let i = 0; i < results.rows.length; i++) {
+          rows.push(results.rows.item(i));
+        }
+        this.setState({ rows });
+      }, null);
+    });
+  }
+
   render() {
     return (
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
@@ -43,7 +66,9 @@ export default class Presentation extends React.Component {
           <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
             open the presentation/index.js file to get started
           </Text>
-          <Sandbox />
+        </Slide>
+        <Slide transition={["fade"]}>
+          <Sandbox rows={this.state.rows} />
         </Slide>
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>Typography</Heading>
