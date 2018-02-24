@@ -35,7 +35,11 @@ const theme = createTheme({
 export default class Presentation extends React.Component {
   constructor() {
     super();
-    this.state = { rows: [] };
+    this.state = {
+      movies: [],
+      users: [],
+      watches: []
+    };
   }
 
   componentDidMount() {
@@ -67,12 +71,28 @@ export default class Presentation extends React.Component {
     });
 
     db.transaction((tx) => {
-      tx.executeSql("SELECT * FROM MOVIES", [], (_, results) => {
-        const rows = [];
+      tx.executeSql("SELECT * FROM Movies", [], (_, results) => {
+        const movies = [];
         for (let i = 0; i < results.rows.length; i++) {
-          rows.push(results.rows.item(i));
+          movies.push(results.rows.item(i));
         }
-        this.setState({ rows });
+        this.setState({ movies });
+      }, null);
+
+      tx.executeSql("SELECT * FROM Users", [], (_, results) => {
+        const users = [];
+        for (let i = 0; i < results.rows.length; i++) {
+          users.push(results.rows.item(i));
+        }
+        this.setState({ users });
+      }, null);
+
+      tx.executeSql("SELECT * FROM Watches", [], (_, results) => {
+        const watches = [];
+        for (let i = 0; i < results.rows.length; i++) {
+          watches.push(results.rows.item(i));
+        }
+        this.setState({ watches });
       }, null);
     });
   }
@@ -89,8 +109,16 @@ export default class Presentation extends React.Component {
           </Text>
         </Slide>
         <Slide transition={["fade"]}>
-          <Sandbox rows={this.state.rows} />
+          <h3>Movies</h3>
+          <Sandbox rows={this.state.movies} />
+
+          <h3>Users</h3>
+          <Sandbox rows={this.state.users} />
+
+          <h3>Watches</h3>
+          <Sandbox rows={this.state.watches} />
         </Slide>
+
         <Slide transition={["fade"]} bgColor="tertiary">
           <Heading size={6} textColor="primary" caps>Typography</Heading>
           <Heading size={1} textColor="secondary">Heading 1</Heading>
