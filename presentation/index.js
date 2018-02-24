@@ -42,7 +42,28 @@ export default class Presentation extends React.Component {
     const db = openDatabase("mydb", "1.0", "Test DB", 2 * 1024 * 1024);
 
     db.transaction((tx) => {
-      tx.executeSql("CREATE TABLE IF NOT EXISTS MOVIES (id unique, first_name, last_name, email)");
+      tx.executeSql(`
+        CREATE TABLE IF NOT EXISTS Movies (
+          id integer PRIMARY KEY UNIQUE,
+          first_name TEXT,
+          last_name TEXT,
+          email TEXT
+        )
+      `);
+      tx.executeSql(`
+        CREATE TABLE IF NOT EXISTS Users (
+          id integer PRIMARY KEY UNIQUE,
+          first_name TEXT,
+          last_name TEXT,
+          email TEXT
+        )
+      `);
+      tx.executeSql(`
+        CREATE TABLE IF NOT EXISTS Watches (
+          user_id INTEGER,
+          movie_id INTEGER
+        )
+      `);
     });
 
     db.transaction((tx) => {
