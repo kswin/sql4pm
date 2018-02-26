@@ -1,4 +1,15 @@
 :root {
-  --white: #FFF;
-  --light-blue: #03A9FC;
+  --aluminum: #D9D9D9;
+  --black: #1F2022;
+  --cerulean: #4484CE;
+  --cerulean-pale: #DBEBFF;
+  --cerulean-palest: #F4F9FF;
+  --gray: #CECECE;
+  --light: #F9CF00;
+  --tangerine: #F19F4D;
+
+  --sm: 6px;
+  --reg: 12px;
+  --lg: 18px;
+  --ex-lg: 24px;
 }

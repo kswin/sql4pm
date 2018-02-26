@@ -1,7 +1,35 @@
-.table tr:odd {
+@import url('https://fonts.googleapis.com/css?family=Overpass');
+@import url('https://fonts.googleapis.com/css?family=Overpass+Mono');
+
+body {
+  font-family: 'Overpass';
+}
+
+.Sandbox {
+  display: flex;
+}
+
+.Sandbox__table {
+  border-collapse: collapse;
+  display: block;
+  height: 500px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.Sandbox__table thead {
+  font-family: 'Overpass Mono';
+}
+
+.Sandbox__table tr:nth-child(odd) {
   background-color: white;
 }
 
-.table tr:even {
+.Sandbox__table tr:nth-child(even) {
+  background-color: var(--cerulean-palest);
+  color: var(--black);
+}
 
+.half {
+  flex: 1 1 50%;
 }

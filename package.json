@@ -14,8 +14,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "codemirror": "^5.35.0",
     "normalize.css": "7.0.0",
     "react": "^16.0.0",
+    "react-codemirror2": "^4.0.0",
     "react-dom": "^16.0.0",
     "spectacle": "^4.0.0",
     "spectacle-renderer": "^0.0.3"
@@ -37,7 +39,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.0",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.10",
     "eslint": "^4.9.0",
     "eslint-config-formidable": "^3.0.0",
     "eslint-plugin-filenames": "^1.2.0",
