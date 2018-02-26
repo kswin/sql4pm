@@ -18,25 +18,19 @@ export default class Presentation extends React.Component {
   componentDidMount() {
     db.transaction(tx => {
       tx.executeSql('DROP TABLE IF EXISTS movies');
-      tx.executeSql(`
-        CREATE TABLE movies${SEED_DATA.MOVIES.SCHEMA}`
-      );
+      tx.executeSql(`CREATE TABLE movies${SEED_DATA.MOVIES.SCHEMA}`);
       SEED_DATA.MOVIES.VALUES.map(values =>
         tx.executeSql(`INSERT INTO movies (title, genre) VALUES ${values}`)
       );
 
       tx.executeSql('DROP TABLE IF EXISTS users');
-      tx.executeSql(`
-        CREATE TABLE users(${SEED_DATA.USERS.SCHEMA})`
-      );
+      tx.executeSql(`CREATE TABLE users(${SEED_DATA.USERS.SCHEMA})`);
       SEED_DATA.USERS.VALUES.map(values =>
         tx.executeSql(`INSERT INTO users (first_name, last_name, email) VALUES ${values}`)
       );
 
       tx.executeSql('DROP TABLE IF EXISTS watches');
-      tx.executeSql(`
-        CREATE TABLE watches(${SEED_DATA.WATCHES.SCHEMA})`
-      );
+      tx.executeSql(`CREATE TABLE watches(${SEED_DATA.WATCHES.SCHEMA})`);
       SEED_DATA.WATCHES.VALUES.map(values =>
         tx.executeSql(`INSERT INTO watches (user_id, movie_id) VALUES ${values}`)
       );
@@ -57,6 +51,7 @@ export default class Presentation extends React.Component {
 
   render() {
     return <Sandbox
+      tableName="Movies"
       rows={this.state.movies}
       schema={SEED_DATA.MOVIES.SCHEMA}
       db={db}

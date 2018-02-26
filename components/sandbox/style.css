@@ -5,16 +5,19 @@ body {
   font-family: 'Overpass';
 }
 
-.Sandbox {
+.Sandbox__db {
   display: flex;
+}
+
+.SampleData .Sandbox__table {
+  height: 300px;
+  overflow-y: scroll;
+  width: 100%;
 }
 
 .Sandbox__table {
   border-collapse: collapse;
   display: block;
-  height: 500px;
-  overflow-y: scroll;
-  width: 100%;
 }
 
 .Sandbox__table thead {
